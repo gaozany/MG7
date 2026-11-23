@@ -25,7 +25,8 @@ public class Bird : MonoBehaviour
     //      coded! :)
     private void OnEnable()
     {
-        
+        _popUpTimeRemaining = _popUpTime;
+    _doPopUpAnimation = true;    
     }
     // STEP 2 -----------------------------------------------------------------
 
@@ -34,7 +35,20 @@ public class Bird : MonoBehaviour
         // STEP 3 -------------------------------------------------------------
         // Update your timer, and if the bird should still be animating,
         //      move it upwards with Translate.
+        if (_doPopUpAnimation)
+{
+    _popUpTimeRemaining -= Time.deltaTime;
 
+    transform.Translate(
+        Vector3.up * _popUpSpeed * Time.deltaTime,
+        Space.World
+    );
+
+    if (_popUpTimeRemaining <= 0f)
+    {
+        _doPopUpAnimation = false;
+    }
+}
 
         // STEP 3 -------------------------------------------------------------
 
